@@ -75,31 +75,31 @@ logoutButton.action = function() {
     if (response.success) {
       favoritesWidget.clearTable();
       favoritesWidget.fillTable(response.data);
-      favoritesWidget.updateUsersList(response.data);
+      moneyManager.updateUsersList(response.data);
     } else {
       console.error('Ошибка получения списка избранного');
     }
   });
-
+  
   favoritesWidget.addUserCallback = function(data) {
     ApiConnector.addUserToFavorites(data, response => {
       if (response.success) {
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
-        favoritesWidget.updateUsersList(response.data);
+        moneyManager.updateUsersList(response.data);
         favoritesWidget.setMessage(true, 'Пользователь добавлен в избранное');
       } else {
         favoritesWidget.setMessage(false, response.error || 'Ошибка добавления пользователя в избранное');
       }
     });
   };
-
+  
   favoritesWidget.removeUserCallback = function(data) {
     ApiConnector.removeUserFromFavorites(data, response => {
       if (response.success) {
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
-        favoritesWidget.updateUsersList(response.data);
+        moneyManager.updateUsersList(response.data);
         favoritesWidget.setMessage(true, 'Пользователь удален из избранного');
       } else {
         favoritesWidget.setMessage(false, response.error || 'Ошибка удаления пользователя из избранного');
